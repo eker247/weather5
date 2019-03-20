@@ -1,0 +1,49 @@
+{
+  "cod": "200",
+  "message": 0.0047,
+  "cnt": 40,
+  "list": [
+    {
+      "dt": 1553104800,
+      "main": {
+        "temp": 277.96,
+        "temp_min": 276.881,
+        "temp_max": 277.96,
+        "pressure": 1031.98,
+        "sea_level": 1031.98,
+        "grnd_level": 1019.31,
+        "humidity": 59,
+        "temp_kf": 1.08
+      },
+      "weather": [
+        {
+          "id": 800,
+          "main": "Clear",
+          "description": "clear sky",
+          "icon": "01n"
+        }
+      ],
+      "clouds": {
+        "all": 0
+      },
+      "wind": {
+        "speed": 3.17,
+        "deg": 256.501
+      },
+      "sys": {
+        "pod": "n"
+      },
+      "dt_txt": "2019-03-20 18:00:00"
+    }
+  ],
+  "city": {
+    "id": 756135,
+    "name": "Warsaw",
+    "coord": {
+      "lat": 52.2319,
+      "lon": 21.0067
+    },
+    "country": "PL",
+    "population": 1000000
+  }
+}
