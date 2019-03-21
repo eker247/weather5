@@ -1,11 +1,6 @@
-<!-- <div *ngFor="let item of (list | async)">
-  {{ item.weather.description }}
-</div> -->
-
-<!-- <div *ngIf="(resp | async)?.message">
-  {{ (resp | async).message }}
-</div> -->
-
-<div *ngIf="resp">
-  {{ resp.cod }}
+<div class="black"></div>
+<div class="hh">
+  <div *ngIf="resp">
+    {{ resp.cod }}
+  </div>
 </div>

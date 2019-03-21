@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
 import { WeatherResponse } from '../models/weather/WeatherResponse';
+import { environment } from '../../../environments/environment';
 
 // For more api calls look at:
 // https://openweathermap.org/forecast5
@@ -24,7 +24,8 @@ export class WeatherService {
     }});
   }
 
-  getWeatherForTownMock(): Observable<WeatherResponse> {
+  getWeatherForTownMock(name: string): Observable<WeatherResponse> {
+    console.log(`getWeatherForTownMock(${name})`);
     return this.http.get<WeatherResponse>('/assets/tmp-warsaw.json');
   }
 
