@@ -1,3 +1,11 @@
-<p>
-  weather-main works!
-</p>
+<!-- <div *ngFor="let item of (list | async)">
+  {{ item.weather.description }}
+</div> -->
+
+<!-- <div *ngIf="(resp | async)?.message">
+  {{ (resp | async).message }}
+</div> -->
+
+<div *ngIf="resp">
+  {{ resp.cod }}
+</div>

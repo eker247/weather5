@@ -4,7 +4,7 @@ import { WeatherMain } from './WeatherMain';
 import { WeatherClouds } from './WeatherClouds';
 import { WeatherGeneral } from './WeatherGeneral';
 
-export interface WeatherResponse {
+export interface WeatherListItem {
   clouds: WeatherClouds;
   dt: number;
   dt_txt: string;
