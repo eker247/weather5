@@ -1,0 +1,14 @@
+<div class="black-bar align-bottom">
+  <div *ngIf="weatherResp" class="align-b ml-4 mb-3">Temperature in {{ weatherResp.city.name }}</div>
+</div>
+
+<div class="table-responsive">
+  <div *ngIf="temperatures">
+    <app-chart-wide
+      [chartData]="temperatures"
+      [chartLabels]="hours"
+      chartDataLabel="Temperature"
+    ></app-chart-wide>
+  </div>
+</div>
+

@@ -1,1 +1,26 @@
 /* You can add global styles to this file, and also import other style files */
+
+.black-bar {
+  position: relative;
+  height: 90px;
+  background: #222;
+  color: #ddd;
+}
+
+.align-t {
+  position: absolute;
+  top: 0;
+}
+
+.align-b {
+  position: absolute;
+  bottom: 0;
+}
+
+.relative {
+  position: relative;
+}
+
+.w-sm {
+  width: 60px;
+}

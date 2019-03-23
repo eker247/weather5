@@ -2,10 +2,13 @@ import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { ROUTES } from '../sidebar/sidebar.component';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { Router } from '@angular/router';
-import Chart from 'chart.js';
 import { fromEvent, of } from 'rxjs';
-import { debounceTime, flatMap } from 'rxjs/operators';
+import { debounceTime, flatMap, catchError } from 'rxjs/operators';
 import { WeatherService } from '../../../core/services/weather.service';
+import { CacheService } from 'app/core/services/cache.service';
+import { WeatherResponse } from 'app/core/models/weather/WeatherResponse';
+import { kelvinToCelsius } from 'app/core/functions';
+import { WeatherWind } from 'app/core/models/weather/WeatherWind';
 
 @Component({
   selector: 'app-navbar',
@@ -21,14 +24,17 @@ export class NavbarComponent implements OnInit {
   mobile_menu_visible: any = 0;
   private toggleButton: any;
   private sidebarVisible: boolean;
-
   public isCollapsed = true;
+  weatherResp: WeatherResponse;
+  temperature: number;
+  wind: WeatherWind;
 
   constructor(
     location: Location,
     private element: ElementRef,
     private router: Router,
-    private weatherService: WeatherService
+    private weatherService: WeatherService,
+    private cacheService: CacheService
   ) {
     this.location = location;
     this.sidebarVisible = false;
@@ -47,19 +53,39 @@ export class NavbarComponent implements OnInit {
       }
     });
     this.trackSearcher();
+    // this.setCurrentData();
+    // this.initData();
+  }
+
+  initData() {
+    this.cacheService.newWeather$.subscribe(() => this.weatherResp = this.cacheService.getWeather());
+  }
+
+  setCurrentData() {
+    this.weatherResp = this.cacheService.getWeather();
+    console.log(this.weatherResp);
+    if (!this.weatherResp) {
+      return;
+    }
+    const current = this.weatherResp.list[0];
+    this.temperature = kelvinToCelsius(current.main.temp);
+    this.wind = current.wind;
   }
 
   trackSearcher() {
     const searchQuery = fromEvent(this.inputSearcher.nativeElement, 'keyup').pipe(debounceTime(500));
-    const weather = searchQuery.pipe(flatMap(r => 
-      this.weatherService.getWeatherForTownMock(this.inputSearcher.nativeElement.value)));
-    weather.subscribe(console.log);
+    const weather = searchQuery.pipe(
+      flatMap(r => this.weatherService.getWeatherForTown(this.inputSearcher.nativeElement.value)),
+      catchError(e => { this.trackSearcher(); return of(null); })
+    );
+    weather.subscribe(r => {
+      this.cacheService.setWeather(r);
+    });
   }
 
   collapse() {
     this.isCollapsed = !this.isCollapsed;
     const navbar = document.getElementsByTagName('nav')[0];
-    console.log(navbar);
     if (!this.isCollapsed) {
       navbar.classList.remove('navbar-transparent');
       navbar.classList.add('bg-white');
@@ -170,9 +196,5 @@ export class NavbarComponent implements OnInit {
       }
     }
     return 'Weather 5';
-  }
-
-  submitForm() {
-    console.log('asdf');
   }
 }

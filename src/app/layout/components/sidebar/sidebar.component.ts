@@ -3,22 +3,16 @@ import { Component, OnInit } from '@angular/core';
 declare interface RouteInfo {
   path: string;
   title: string;
-  icon: string;
+  icon?: string;
+  svg?: string;
   class: string;
 }
 export const ROUTES: RouteInfo[] = [
-  { path: '/weather', title: 'Weather', icon: 'arrows-1_cloud-upload-94', class: '' },
-
-  { path: '/dashboard', title: 'Dashboard', icon: 'design_app', class: '' },
-
-  { path: '/icons', title: 'Icons', icon: 'education_atom', class: '' },
-  { path: '/maps', title: 'Maps', icon: 'location_map-big', class: '' },
-  { path: '/notifications', title: 'Notifications', icon: 'ui-1_bell-53', class: '' },
-
-  { path: '/user-profile', title: 'User Profile', icon: 'users_single-02', class: '' },
-  { path: '/table-list', title: 'Table List', icon: 'design_bullet-list-67', class: '' },
-  { path: '/typography', title: 'Typography', icon: 'text_caps-small', class: '' },
-
+  { path: '/weather', title: 'Weather', svg: 'cloud', class: '' },
+  { path: '/temperature', title: 'Temperature', svg: 'thermometer', class: '' },
+  { path: '/pressure', title: 'Pressure', svg: 'pressure', class: '' },
+  { path: '/humidity', title: 'Humidity', svg: 'humidity', class: '' },
+  { path: '/wind', title: 'Wind', svg: 'wind', class: '' },
 ];
 
 @Component({
@@ -39,5 +33,5 @@ export class SidebarComponent implements OnInit {
       return false;
     }
     return true;
-  };
+  }
 }

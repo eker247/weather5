@@ -1,20 +1,19 @@
 import { Routes } from '@angular/router';
 
-import { DashboardComponent } from '../../dashboard/dashboard.component';
-import { UserProfileComponent } from '../../user-profile/user-profile.component';
-import { TableListComponent } from '../../table-list/table-list.component';
-import { TypographyComponent } from '../../typography/typography.component';
-import { IconsComponent } from '../../icons/icons.component';
-import { MapsComponent } from '../../maps/maps.component';
-import { NotificationsComponent } from '../../notifications/notifications.component';
+import {
+  WeatherHumidityComponent,
+  WeatherMainComponent,
+  WeatherPressureComponent,
+  WeatherTemperatureComponent,
+  WeatherWindComponent
+} from 'app/modules/weather';
 
 export const AdminLayoutRoutes: Routes = [
-    { path: 'weather', loadChildren: '../../../modules/weather/weather.module#WeatherModule' },
-    { path: 'dashboard',      component: DashboardComponent },
-    { path: 'user-profile',   component: UserProfileComponent },
-    { path: 'table-list',     component: TableListComponent },
-    { path: 'typography',     component: TypographyComponent },
-    { path: 'icons',          component: IconsComponent },
-    { path: 'maps',           component: MapsComponent },
-    { path: 'notifications',  component: NotificationsComponent },
+  // { path: 'weather', loadChildren: '../../../modules/weather/weather.module#WeatherModule' },
+  { path: '', redirectTo: 'weather' },
+  { path: 'humidity', component: WeatherHumidityComponent },
+  { path: 'weather', component: WeatherMainComponent },
+  { path: 'pressure', component: WeatherPressureComponent },
+  { path: 'temperature', component: WeatherTemperatureComponent },
+  { path: 'wind', component: WeatherWindComponent },
 ];

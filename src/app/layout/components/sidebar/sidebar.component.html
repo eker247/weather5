@@ -13,7 +13,10 @@
     <ul class="nav">
         <li routerLinkActive="active" *ngFor="let menuItem of menuItems" class="{{menuItem.class}} nav-item">
             <a [routerLink]="[menuItem.path]">
-                <i class="now-ui-icons {{menuItem.icon}}"></i>
+                <i *ngIf="menuItem.icon" class="now-ui-icons {{menuItem.icon}}"></i>
+                <i *ngIf="menuItem.svg" class="ico-svg nav-item">
+                    <img [src]="'assets/svg/' + menuItem.svg + '.svg'" />
+                </i>
                 <p>{{menuItem.title}}</p>
             </a>
         </li>

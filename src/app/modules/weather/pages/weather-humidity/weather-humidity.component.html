@@ -1,0 +1,14 @@
+<div class="black-bar align-bottom">
+  <div *ngIf="weatherResp" class="align-b ml-4 mb-3">Air humidity in {{ weatherResp.city.name }}</div>
+</div>
+
+<div class="table-responsive">
+  <div *ngIf="humidities">
+    <app-chart-wide
+      [chartData]="humidities"
+      [chartLabels]="hours"
+      chartDataLabel="Humidity"
+    ></app-chart-wide>
+  </div>
+</div>
+    

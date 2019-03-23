@@ -1,4 +1,4 @@
-export interface WeatherMain {
+export class WeatherMain {
   grnd_level: number;
   humidity: number;
   pressure: number;
@@ -7,4 +7,10 @@ export interface WeatherMain {
   temp_kf: number;
   temp_max: number;
   temp_min: number;
+
+  constructor(obj: any = null) {
+    if (obj) {
+      Object.assign(this, obj);
+    }
+  }
 }

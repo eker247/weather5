@@ -1,9 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { WeatherService } from '../../../../core/services/weather.service';
-import { Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
-import { WeatherResponse } from '../../../../core/models/weather/WeatherResponse';
-import { WeatherListItem } from '../../../../core/models/weather/WeatherListItem';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { WeatherResponse } from 'app/core/models/weather/WeatherResponse';
+import { CacheService } from 'app/core/services/cache.service';
 
 @Component({
   selector: 'app-weather-main',
@@ -11,13 +8,19 @@ import { WeatherListItem } from '../../../../core/models/weather/WeatherListItem
   styleUrls: ['./weather-main.component.scss']
 })
 export class WeatherMainComponent implements OnInit {
-  resp: WeatherResponse;
-  list: Observable<WeatherListItem[]>;
 
-  constructor(private _ws: WeatherService) { }
+  weatherResp: WeatherResponse;
+
+  constructor(private _cs: CacheService) { }
 
   ngOnInit() {
-    this._ws.getWeatherForTownMock('as').pipe(tap(console.log)).subscribe(r => this.resp = r);
-    // this.list = this._ws.getWeatherForTownMock().pipe(map(r => r.list), tap(console.log));
+    this.initData();
+    this._cs.newWeather$.subscribe(() => {
+      this.initData();
+    });
+  }
+
+  initData() {
+    this.weatherResp = this._cs.getWeather();
   }
 }
