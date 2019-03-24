@@ -1,9 +1,10 @@
 <div class="black-bar align-bottom">
   <div *ngIf="weatherResp" class="align-b ml-4 mb-3">Weather in {{ weatherResp.city.name }}</div>
+  <div *ngIf="!weatherResp" class="align-b ml-4 mb-3">No available forecast. Put a city name into the searcher.</div>
 </div>
 
-<div class="table-responsive">
-  <table class="table table-sm table-stripped table-hover" *ngIf="weatherResp">
+<div class="table-div">
+  <table class="table table-sm table-stripped table-hover table-responsive" *ngIf="weatherResp">
     <thead>
       <tr>
         <th>Date</th>
@@ -15,9 +16,9 @@
     </thead>
     <tbody>
       <tr *ngFor="let item of weatherResp.list">
-        <td>{{ item.dt_txt }}</td>
+        <td>{{ item.dt_txt | noMs }}</td>
         <td>{{ item.main.temp | kelvinToCelsius }}</td>
-        <td>{{ item.wind.speed }} <app-arrow [rotate]="item.wind.deg"></app-arrow>
+        <td>{{ item.wind.speed }} <app-arrow class="ml-2" [rotate]="item.wind.deg"></app-arrow>
         </td>
         <td>{{ item.main.pressure }}</td>
         <td>{{ item.main.humidity }}</td>

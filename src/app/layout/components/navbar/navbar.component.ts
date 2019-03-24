@@ -1,14 +1,12 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { ROUTES } from '../sidebar/sidebar.component';
-import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { Location } from '@angular/common';
 import { Router } from '@angular/router';
-import { fromEvent, of } from 'rxjs';
-import { debounceTime, flatMap, catchError } from 'rxjs/operators';
-import { WeatherService } from '../../../core/services/weather.service';
 import { CacheService } from 'app/core/services/cache.service';
 import { WeatherResponse } from 'app/core/models/weather/WeatherResponse';
 import { kelvinToCelsius } from 'app/core/functions';
 import { WeatherWind } from 'app/core/models/weather/WeatherWind';
+import { WeatherService } from 'app/core/services/weather.service';
 
 @Component({
   selector: 'app-navbar',
@@ -46,15 +44,14 @@ export class NavbarComponent implements OnInit {
     this.toggleButton = navbar.getElementsByClassName('navbar-toggler')[0];
     this.router.events.subscribe((event) => {
       this.sidebarClose();
-      var $layer: any = document.getElementsByClassName('close-layer')[0];
+      let $layer: any = document.getElementsByClassName('close-layer')[0];
       if ($layer) {
         $layer.remove();
         this.mobile_menu_visible = 0;
       }
     });
-    this.trackSearcher();
-    // this.setCurrentData();
-    // this.initData();
+    this.setCurrentData();
+    this.initData();
   }
 
   initData() {
@@ -63,7 +60,6 @@ export class NavbarComponent implements OnInit {
 
   setCurrentData() {
     this.weatherResp = this.cacheService.getWeather();
-    console.log(this.weatherResp);
     if (!this.weatherResp) {
       return;
     }
@@ -72,13 +68,8 @@ export class NavbarComponent implements OnInit {
     this.wind = current.wind;
   }
 
-  trackSearcher() {
-    const searchQuery = fromEvent(this.inputSearcher.nativeElement, 'keyup').pipe(debounceTime(500));
-    const weather = searchQuery.pipe(
-      flatMap(r => this.weatherService.getWeatherForTown(this.inputSearcher.nativeElement.value)),
-      catchError(e => { this.trackSearcher(); return of(null); })
-    );
-    weather.subscribe(r => {
+  searchForecast(cityName: string) {
+    this.weatherService.getWeatherForTown(cityName).subscribe(r => {
       this.cacheService.setWeather(r);
     });
   }

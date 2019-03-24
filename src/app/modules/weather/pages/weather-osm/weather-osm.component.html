@@ -1,0 +1,17 @@
+<div class="black-bar align-bottom">
+  <div *ngIf="weatherResp" class="align-b ml-4 mb-3">{{ weatherResp.city.name }} on a map.</div>
+  <div *ngIf="!weatherResp" class="align-b ml-4 mb-3">No available forecast. Put a city name into the searcher.</div>
+</div>
+
+<div class="map-content">
+
+  <app-weather-map *ngIf="isMapVisible && !weatherResp" ></app-weather-map>
+  
+  <ng-container *ngIf="isMapVisible && weatherResp">
+    <app-weather-map
+      [longitude]="weatherResp.city.coord.lon"
+      [latitude]="weatherResp.city.coord.lat"
+    ></app-weather-map>
+  </ng-container>
+
+</div>

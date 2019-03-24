@@ -9,14 +9,20 @@ import { WeatherHumidityComponent } from './pages/weather-humidity/weather-humid
 import { WeatherWindComponent } from './pages/weather-wind/weather-wind.component';
 import { ArrowModule } from '../arrow/arrow.module';
 import { PipesModule } from '../pipes/pipes.module';
+import { WeatherOsmComponent } from './pages/weather-osm/weather-osm.component';
+import { WeatherNoContentComponent } from './components/weather-no-content/weather-no-content.component';
+import { WeatherMapComponent } from './components/weather-map/weather-map.component';
 
 @NgModule({
   declarations: [
     WeatherHumidityComponent,
     WeatherMainComponent,
+    WeatherOsmComponent,
     WeatherPressureComponent,
     WeatherTemperatureComponent,
     WeatherWindComponent,
+    WeatherNoContentComponent,
+    WeatherMapComponent,
   ],
   imports: [
     CommonModule,
@@ -27,6 +33,7 @@ import { PipesModule } from '../pipes/pipes.module';
   exports: [
     WeatherHumidityComponent,
     WeatherMainComponent,
+    WeatherOsmComponent,
     WeatherPressureComponent,
     WeatherTemperatureComponent,
     WeatherWindComponent,

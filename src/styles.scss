@@ -24,3 +24,22 @@
 .w-sm {
   width: 60px;
 }
+
+.weather-content {
+  min-height: calc(100vh - 159px);
+  background-color: #2c2c2c;
+}
+
+.table-div {
+  margin: auto;
+  max-width: 700px;
+  text-align: center;
+  min-height: calc(100vh - 159px);
+}
+
+.table-responsive {
+  margin: auto;
+  overflow-y: hidden;
+  overflow-x: auto;
+  width: 100%;
+}

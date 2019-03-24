@@ -19,7 +19,9 @@
     <div class="collapse navbar-collapse justify-content-end" id="collapseExample" [ngbCollapse]="isCollapsed">
       <div>
         <div class="input-group no-border">
-          <input type="text" value="" class="form-control" placeholder="Search..." #inputSearcher>
+          <input type="text" value="" class="form-control input-searcher" placeholder="Search..." #inputSearcher
+            (keyup.enter)="searchForecast($event.target.value)"
+          >
           <div class="input-group-append">
             <div class="input-group-text">
               <i class="now-ui-icons ui-1_zoom-bold"></i>
@@ -27,10 +29,10 @@
           </div>
         </div>
       </div>
-      <span class="relative w-sm" *ngIf="weatherResp">
-        <i class="align-t w-sm">{{ temperature }} &deg;C</i>
-        <i class="align-b w-sm">{{ wind.speed }} m/s</i>
-      </span>
+      <div class="relative pt-1" *ngIf="temperature">
+        <i class="mr-2">{{ temperature }} &deg;C</i>
+        <i class="">{{ wind.speed }} m/s</i>
+      </div>
     </div>
   </div>
 </nav>

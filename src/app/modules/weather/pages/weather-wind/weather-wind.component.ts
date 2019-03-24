@@ -23,5 +23,6 @@ export class WeatherWindComponent implements OnInit {
 
   initData() {
     this.weatherResp = this._cs.getWeather();
+    console.log(this.weatherResp);
   }
 }

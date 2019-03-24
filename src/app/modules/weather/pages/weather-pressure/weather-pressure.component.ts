@@ -12,6 +12,7 @@ export class WeatherPressureComponent implements OnInit {
   weatherResp: WeatherResponse;
   pressures: number[];
   hours: string[];
+  isChartVisible = true;
 
   constructor(private _cs: CacheService) { }
 
@@ -27,6 +28,15 @@ export class WeatherPressureComponent implements OnInit {
     if (this.weatherResp) {
       this.pressures = this.weatherResp.list.map(wli => wli.main.pressure);
       this.hours = this.weatherResp.list.map(wli => wli.dt_txt.substring(0, 16));
+      this.resetChart();
     }
+  }
+
+
+  resetChart() {
+    this.isChartVisible = false;
+    setTimeout(() => {
+      this.isChartVisible = true;
+    }, 10);
   }
 }

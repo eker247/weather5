@@ -12,6 +12,7 @@ export class WeatherHumidityComponent implements OnInit {
   weatherResp: WeatherResponse;
   humidities: number[];
   hours: string[];
+  isChartVisible = true;
 
   constructor(private _cs: CacheService) { }
 
@@ -27,6 +28,14 @@ export class WeatherHumidityComponent implements OnInit {
     if (this.weatherResp) {
       this.humidities = this.weatherResp.list.map(wli => wli.main.humidity);
       this.hours = this.weatherResp.list.map(wli => wli.dt_txt.substring(0, 16));
+      this.resetChart();
     }
+  }
+
+  resetChart() {
+    this.isChartVisible = false;
+    setTimeout(() => {
+      this.isChartVisible = true;
+    }, 10);
   }
 }

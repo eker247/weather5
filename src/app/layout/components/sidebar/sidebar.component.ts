@@ -13,6 +13,7 @@ export const ROUTES: RouteInfo[] = [
   { path: '/pressure', title: 'Pressure', svg: 'pressure', class: '' },
   { path: '/humidity', title: 'Humidity', svg: 'humidity', class: '' },
   { path: '/wind', title: 'Wind', svg: 'wind', class: '' },
+  { path: '/map', title: 'Map', svg: 'map', class: '' },
 ];
 
 @Component({

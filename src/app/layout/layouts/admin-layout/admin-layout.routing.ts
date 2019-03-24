@@ -7,6 +7,7 @@ import {
   WeatherTemperatureComponent,
   WeatherWindComponent
 } from 'app/modules/weather';
+import { WeatherOsmComponent } from 'app/modules/weather/pages/weather-osm/weather-osm.component';
 
 export const AdminLayoutRoutes: Routes = [
   // { path: 'weather', loadChildren: '../../../modules/weather/weather.module#WeatherModule' },
@@ -16,4 +17,5 @@ export const AdminLayoutRoutes: Routes = [
   { path: 'pressure', component: WeatherPressureComponent },
   { path: 'temperature', component: WeatherTemperatureComponent },
   { path: 'wind', component: WeatherWindComponent },
+  { path: 'map', component: WeatherOsmComponent },
 ];
