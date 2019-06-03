@@ -1,22 +1,21 @@
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
-import { ROUTES } from '../sidebar/sidebar.component';
-import { Location } from '@angular/common';
-import { Router } from '@angular/router';
-import { CacheService } from 'app/core/services/cache.service';
-import { WeatherResponse } from 'app/core/models/weather/WeatherResponse';
-import { kelvinToCelsius } from 'app/core/functions';
-import { WeatherWind } from 'app/core/models/weather/WeatherWind';
-import { WeatherService } from 'app/core/services/weather.service';
+import {Component, OnInit, ElementRef, ViewChild, AfterViewInit} from '@angular/core';
+import {ROUTES} from '../sidebar/sidebar.component';
+import {Location} from '@angular/common';
+import {Router} from '@angular/router';
+import {CacheService} from 'app/core/services/cache.service';
+import {WeatherResponse} from 'app/core/models/weather/WeatherResponse';
+import {kelvinToCelsius} from 'app/core/functions';
+import {WeatherWind} from 'app/core/models/weather/WeatherWind';
+import {WeatherService} from 'app/core/services/weather.service';
+import {fromEvent} from 'rxjs';
+import {filter, flatMap, map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent implements OnInit {
-
-  @ViewChild('inputSearcher') inputSearcher: ElementRef<HTMLInputElement>;
-
+export class NavbarComponent implements OnInit, AfterViewInit {
   private listTitles: any[];
   location: Location;
   mobile_menu_visible: any = 0;
@@ -58,6 +57,10 @@ export class NavbarComponent implements OnInit {
     this.cacheService.newWeather$.subscribe(() => this.weatherResp = this.cacheService.getWeather());
   }
 
+  ngAfterViewInit() {
+    // this.searchForecast();
+  }
+
   setCurrentData() {
     this.weatherResp = this.cacheService.getWeather();
     if (!this.weatherResp) {
@@ -66,12 +69,6 @@ export class NavbarComponent implements OnInit {
     const current = this.weatherResp.list[0];
     this.temperature = kelvinToCelsius(current.main.temp);
     this.wind = current.wind;
-  }
-
-  searchForecast(cityName: string) {
-    this.weatherService.getWeatherForTown(cityName).subscribe(r => {
-      this.cacheService.setWeather(r);
-    });
   }
 
   collapse() {
@@ -103,6 +100,7 @@ export class NavbarComponent implements OnInit {
 
     this.sidebarVisible = true;
   };
+
   sidebarClose() {
     const html = document.getElementsByTagName('html')[0];
     this.toggleButton.classList.remove('toggled');
@@ -116,6 +114,7 @@ export class NavbarComponent implements OnInit {
     this.sidebarVisible = false;
     html.classList.remove('nav-open');
   };
+
   sidebarToggle() {
     // const toggleButton = this.toggleButton;
     // const html = document.getElementsByTagName('html')[0];

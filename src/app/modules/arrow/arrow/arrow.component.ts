@@ -8,12 +8,12 @@ import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
 export class ArrowComponent implements OnInit {
 
   @Input() rotate: number;
-  @ViewChild('arrow') arrow: ElementRef;
+  @ViewChild('arrow', {static: false}) arrow: ElementRef;
 
   constructor() { }
 
   ngOnInit() {
-    this.arrow.nativeElement.style.setProperty('transform', `rotate(${this.rotate || 0}deg)`);
+    // this.arrow.nativeElement.style.setProperty('transform', `rotate(${this.rotate || 0}deg)`);
   }
 
 }

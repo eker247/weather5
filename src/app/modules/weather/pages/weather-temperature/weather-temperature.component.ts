@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { kelvinToCelsius } from 'app/core/functions';
-import { WeatherResponse } from 'app/core/models/weather/WeatherResponse';
-import { CacheService } from 'app/core/services/cache.service';
+import { WeatherService } from '../../../../core/services/weather.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-weather-temperature',
@@ -10,25 +9,14 @@ import { CacheService } from 'app/core/services/cache.service';
 })
 export class WeatherTemperatureComponent implements OnInit {
 
-  weatherResp: WeatherResponse;
-  temperatures: number[];
-  hours: string[];
+  temperature$: Observable<number[]>;
+  hour$: Observable<string[]>;
 
-  constructor(private _cs: CacheService) { }
-
-  ngOnInit() {
-    this.initData();
-    this._cs.newWeather$.subscribe(() => {
-      this.temperatures = null;
-      setTimeout(() => this.initData(), 10);
-    });
+  constructor(private weatherService: WeatherService) {
   }
 
-  initData() {
-    this.weatherResp = this._cs.getWeather();
-    if (this.weatherResp) {
-      this.temperatures = this.weatherResp.list.map(wli => kelvinToCelsius(wli.main.temp));
-      this.hours = this.weatherResp.list.map(wli => wli.dt_txt.substring(0, 16));
-    }
+  ngOnInit() {
+    this.temperature$ = this.weatherService.temperature$;
+    this.hour$ = this.weatherService.forecastTime$;
   }
 }

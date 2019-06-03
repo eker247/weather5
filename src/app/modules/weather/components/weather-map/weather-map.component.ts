@@ -1,9 +1,6 @@
-import { Component, OnInit, ViewChild, ElementRef, Input, AfterViewInit } from '@angular/core';
-import { fromEvent } from 'rxjs';
+import { Component, ViewChild, ElementRef, Input, AfterViewInit, HostListener } from '@angular/core';
 
 declare var ol: any;
-
-let map: any;
 
 @Component({
   selector: 'app-weather-map',
@@ -12,16 +9,30 @@ let map: any;
 })
 export class WeatherMapComponent implements AfterViewInit {
 
-  @Input() longitude: number = 20.6913;
-  @Input() latitude: number = 49.6249;
-  @ViewChild('osmMap') osmMap: ElementRef<any>;
+  @Input() set longitude(n) {
+    this.longitudeData = n;
+    this.setMap();
+  }
 
+  @Input() set latitude(n) {
+    this.latitudeData = n;
+  }
+
+  @ViewChild('osmMap', {static: false}) osmMap: ElementRef<any>;
+
+  longitudeData: number;
+  latitudeData: number;
   map: any;
 
   constructor() {
   }
 
   ngAfterViewInit() {
+    this.setMap();
+  }
+
+
+  setMap() {
     this.map = new ol.Map({
       target: 'map',
       layers: [
@@ -30,7 +41,7 @@ export class WeatherMapComponent implements AfterViewInit {
         })
       ],
       view: new ol.View({
-        center: ol.proj.fromLonLat([this.longitude, this.latitude]),
+        center: ol.proj.fromLonLat([this.longitudeData || 20.6913, this.latitudeData || 49.6249]),
         zoom: 8
       })
     });

@@ -11,28 +11,23 @@
       <a class="navbar-brand" routerLink="/">{{getTitle()}}</a>
     </div>
     <button class="navbar-toggler" type="button" (click)="collapse()" [attr.aria-expanded]="!isCollapsed"
-      aria-controls="collapseExample">
+            aria-controls="collapseExample">
       <span class="navbar-toggler-bar navbar-kebab"></span>
       <span class="navbar-toggler-bar navbar-kebab"></span>
       <span class="navbar-toggler-bar navbar-kebab"></span>
     </button>
     <div class="collapse navbar-collapse justify-content-end" id="collapseExample" [ngbCollapse]="isCollapsed">
       <div>
-        <div class="input-group no-border">
-          <input type="text" value="" class="form-control input-searcher" placeholder="Search..." #inputSearcher
-            (keyup.enter)="searchForecast($event.target.value)"
-          >
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <i class="now-ui-icons ui-1_zoom-bold"></i>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="relative pt-1" *ngIf="temperature">
-        <i class="mr-2">{{ temperature }} &deg;C</i>
-        <i class="">{{ wind.speed }} m/s</i>
+        <app-weather-searcher></app-weather-searcher>
+        <app-weather-page-nav-info></app-weather-page-nav-info>
       </div>
     </div>
   </div>
 </nav>
+
+
+
+<!--<div class="relative pt-1" *ngIf="temperature">-->
+<!--  <i class="mr-2">{{ temperature }} &deg;C</i>-->
+<!--  <i class="">{{ wind.speed }} m/s</i>-->
+<!--</div>-->

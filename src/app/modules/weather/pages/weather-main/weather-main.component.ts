@@ -1,6 +1,7 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { WeatherResponse } from 'app/core/models/weather/WeatherResponse';
-import { CacheService } from 'app/core/services/cache.service';
+import { Observable } from 'rxjs';
+import { WeatherService } from '../../../../core/services/weather.service';
 
 @Component({
   selector: 'app-weather-main',
@@ -9,18 +10,11 @@ import { CacheService } from 'app/core/services/cache.service';
 })
 export class WeatherMainComponent implements OnInit {
 
-  weatherResp: WeatherResponse;
+  weatherResp$: Observable<WeatherResponse>;
 
-  constructor(private _cs: CacheService) { }
+  constructor(private weatherService: WeatherService) { }
 
   ngOnInit() {
-    this.initData();
-    this._cs.newWeather$.subscribe(() => {
-      this.initData();
-    });
-  }
-
-  initData() {
-    this.weatherResp = this._cs.getWeather();
+    this.weatherResp$ = this.weatherService.weather$;
   }
 }
