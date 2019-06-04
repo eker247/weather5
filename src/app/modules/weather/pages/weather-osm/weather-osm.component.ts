@@ -19,6 +19,7 @@ export class WeatherOsmComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.weatherService.setWeatherNavMessage('Map of');
     this.weatherResp$ = this.weatherService.weather$;
   }
 }

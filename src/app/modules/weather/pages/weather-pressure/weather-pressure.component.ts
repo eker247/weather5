@@ -16,6 +16,7 @@ export class WeatherPressureComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.weatherService.setWeatherNavMessage('Pressure in');
     this.pressure$ = this.weatherService.pressure$;
     this.hour$ = this.weatherService.forecastTime$;
   }

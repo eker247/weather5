@@ -3,7 +3,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { WeatherResponse } from '../models/weather/WeatherResponse';
 import { environment } from '../../../environments/environment';
-import { filter, map} from 'rxjs/operators';
+import { filter, map } from 'rxjs/operators';
 import { kelvinToCelsius } from '../functions';
 
 // For more api calls look at:
@@ -12,9 +12,11 @@ import { kelvinToCelsius } from '../functions';
 @Injectable({
   providedIn: 'root'
 })
-export class WeatherService {ś
+export class WeatherService {
 
   weatherSubject = new BehaviorSubject<WeatherResponse>(null);
+  private weatherNavMessage = new BehaviorSubject<string>('Type town name');
+  weatherNavMessage$ = this.weatherNavMessage.asObservable();
 
   weather$ = this.weatherSubject.asObservable().pipe(
     filter(r => r !== null)
@@ -40,10 +42,9 @@ export class WeatherService {ś
     map(weatherResp => weatherResp.list.map(wli => kelvinToCelsius(wli.main.temp)))
   );
 
-  // wind$ = this.weather$.pipe(
-  //   map(weatherResp => weatherResp.list.map(wli => wli.wind))
-  // );
-
+  setWeatherNavMessage(message: string) {
+    this.weatherNavMessage.next(message);
+  }
 
 
   constructor(private http: HttpClient) {

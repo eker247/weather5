@@ -15,6 +15,7 @@ export class WeatherHumidityComponent implements OnInit {
   constructor(private weatherService: WeatherService) { }
 
   ngOnInit() {
+    this.weatherService.setWeatherNavMessage('Humidity in');
     this.humidity$ = this.weatherService.humidity$;
     this.hour$ = this.weatherService.forecastTime$;
   }

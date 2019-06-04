@@ -16,5 +16,7 @@ export class WeatherMainComponent implements OnInit {
 
   ngOnInit() {
     this.weatherResp$ = this.weatherService.weather$;
+    this.weatherService.setWeatherNavMessage('Weather in');
+
   }
 }

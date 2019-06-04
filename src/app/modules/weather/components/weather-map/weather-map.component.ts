@@ -11,7 +11,7 @@ export class WeatherMapComponent implements AfterViewInit {
 
   @Input() set longitude(n) {
     this.longitudeData = n;
-    this.setMap();
+    // this.setMap();
   }
 
   @Input() set latitude(n) {

@@ -1,23 +1,26 @@
 import { NgModule } from '@angular/core';
 import { CommonModule, } from '@angular/common';
-import { BrowserModule  } from '@angular/platform-browser';
+import { BrowserModule } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
 
-import { AdminLayoutComponent } from './layout/layouts/admin-layout/admin-layout.component';
+import { W5LayoutComponent } from './layout/layouts/w5-layout/w5-layout/w5-layout.component';
 
 const routes: Routes = [
   {
     path: '',
     redirectTo: 'weather',
     pathMatch: 'full',
-  }, {
+  },
+  {
     path: '',
-    component: AdminLayoutComponent,
+    component: W5LayoutComponent,
     children: [
-        {
-      path: '',
-      loadChildren: './layout/layouts/admin-layout/admin-layout.module#AdminLayoutModule'
-  }]},
+      {
+        path: '',
+        loadChildren: './layout/layouts/w5-layout/w5-layout.module#W5LayoutModule'
+      }
+    ]
+  },
   {
     path: '**',
     redirectTo: 'dashboard'
@@ -30,7 +33,7 @@ const routes: Routes = [
     BrowserModule,
     RouterModule.forRoot(routes)
   ],
-  exports: [
-  ],
+  exports: [],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

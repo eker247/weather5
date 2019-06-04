@@ -1,0 +1,33 @@
+<nav class="w5-nav">
+
+  <div class="w5-burger" (click)="layoutService.visibleSidebar.next(true)">
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+
+  <div class="w5-brand" routerLink="/">
+    <span>{{getTitle()}} - <app-weather-page-nav-info></app-weather-page-nav-info></span>
+  </div>
+
+  <div class="w5-searcher">
+    <div class="w5-tools">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+
+    <div class="searcher-content">
+
+      <div class="weather-searcher">
+        <app-weather-searcher></app-weather-searcher>
+      </div>
+
+      <div class="searcher-info">
+        <app-weather-page-nav-info></app-weather-page-nav-info>
+      </div>
+
+    </div>
+  </div>
+
+</nav>
