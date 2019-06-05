@@ -1,0 +1,8 @@
+<div class="nav-info">
+  <div *ngIf="weatherTownName$ | async">
+    {{ message$ | async }} {{ weatherTownName$ | async }}
+  </div>
+  <div *ngIf="!(weatherTownName$ | async)">
+    Put a city name into the searcher.
+  </div>
+</div>

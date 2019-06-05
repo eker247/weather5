@@ -10,7 +10,6 @@ declare var ol: any;
 export class WeatherMapComponent implements AfterViewInit {
 
   @Input() set coordinates(coord: { longitude: number, latitude: number }) {
-    console.log(coord);
     this.longitudeData = coord.longitude;
     this.latitudeData = coord.latitude;
     if (this.map) {

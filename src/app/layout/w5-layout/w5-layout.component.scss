@@ -1,0 +1,70 @@
+@import "variables";
+
+.w5-layout {
+  min-height: 100vh;
+  display: grid;
+  grid-template: 56px 1fr 42px / minmax(200px, 1fr) 7fr;
+  color: $sidebar-color;
+}
+
+a {
+  text-decoration: none;
+  color: $sidebar-color;
+}
+
+.w5-navbar {
+  grid-area: 1 / 1 / 2 / 3;
+}
+
+.w5-sidebar {
+  display: none;
+}
+
+.w5-content {
+  grid-area: 2 / 1 / span 1 / span 2;
+}
+
+@media (max-width: $mobile-width) {
+  .w5-sidebar {
+    position: fixed;
+    top: 0;
+    left: -300px !important;
+    z-index: 4;
+    background-color: $sidebar-bg;
+    height: 900px;
+    display: block;
+    left: 0;
+    transition: .3s left;
+  }
+
+  .w5-visible-sidebar {
+    left: 0 !important;
+  }
+
+  .sidebar-background {
+    background-color: #000;
+    opacity: .5;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+  }
+}
+
+@media (min-width: $desktop-width) {
+  .w5-sidebar {
+    display: initial;
+    grid-area: 2 / 1 / span 1 / span 1;
+    align-self: stretch;
+  }
+
+  .w5-content {
+    grid-column-start: 2;
+  }
+}
+
+.w5-footer {
+  grid-area: 3 / 1 / 4 / 3;
+}

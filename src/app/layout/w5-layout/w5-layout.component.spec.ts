@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LayoutMainComponent } from './layout-main.component';
+import { W5LayoutComponent } from 'app/layout/w5-layout/w5-layout.component';
 
-describe('LayoutMainComponent', () => {
-  let component: LayoutMainComponent;
-  let fixture: ComponentFixture<LayoutMainComponent>;
+describe('W5LayoutComponent', () => {
+  let component: W5LayoutComponent;
+  let fixture: ComponentFixture<W5LayoutComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LayoutMainComponent ]
+      declarations: [ W5LayoutComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LayoutMainComponent);
+    fixture = TestBed.createComponent(W5LayoutComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

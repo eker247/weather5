@@ -1,0 +1,21 @@
+.w5-footer {
+  font-size: 1rem;
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  align-items: center;
+  height: 100%;
+
+  ul {
+    justify-self: left;
+
+    li {
+      display: inline-block;
+      margin-left: 6px;
+    }
+  }
+
+  div {
+    justify-self: right;
+    margin-right: 12px;
+  }
+}
