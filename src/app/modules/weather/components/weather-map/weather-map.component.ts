@@ -9,16 +9,14 @@ declare var ol: any;
 })
 export class WeatherMapComponent implements AfterViewInit {
 
-  @Input() set longitude(n) {
-    this.longitudeData = n;
-    // this.setMap();
+  @Input() set coordinates(coord: { longitude: number, latitude: number }) {
+    console.log(coord);
+    this.longitudeData = coord.longitude;
+    this.latitudeData = coord.latitude;
+    if (this.map) {
+      this.changeMapCenter();
+    }
   }
-
-  @Input() set latitude(n) {
-    this.latitudeData = n;
-  }
-
-  @ViewChild('osmMap', {static: false}) osmMap: ElementRef<any>;
 
   longitudeData: number;
   latitudeData: number;
@@ -45,5 +43,9 @@ export class WeatherMapComponent implements AfterViewInit {
         zoom: 8
       })
     });
+  }
+
+  changeMapCenter() {
+    this.map.getView().setCenter(ol.proj.fromLonLat([this.longitudeData, this.latitudeData]));
   }
 }

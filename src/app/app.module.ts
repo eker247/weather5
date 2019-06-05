@@ -13,7 +13,7 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
-import { W5LayoutModule } from './layout/layouts/w5-layout/w5-layout.module';
+import { W5LayoutModule } from 'app/layout/w5-layout.module';
 
 @NgModule({
   imports: [

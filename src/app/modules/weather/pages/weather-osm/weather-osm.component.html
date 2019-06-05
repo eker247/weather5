@@ -1,12 +1,13 @@
 <div class="map-content">
 
-  <app-weather-map *ngIf="isMapVisible && !(weatherResp$ | async)" ></app-weather-map>
-  
-  <ng-container *ngIf="(weatherResp$ | async)">
+  <ng-container *ngIf="(coordinates$ | async) as coord; else noDataTemplate">
     <app-weather-map
-      [longitude]="(weatherResp$ | async).city.coord.lon"
-      [latitude]="(weatherResp$ | async).city.coord.lat"
+      [coordinates]="coord"
     ></app-weather-map>
   </ng-container>
+
+  <ng-template #noDataTemplate>
+    <app-weather-map></app-weather-map>
+  </ng-template>
 
 </div>

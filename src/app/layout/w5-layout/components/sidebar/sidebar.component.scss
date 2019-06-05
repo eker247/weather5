@@ -30,8 +30,15 @@
     padding: 6px;
 
     a {
+      display: block;
       color: $sidebar-color;
+      width: 100%;
     }
+  }
+
+  .active {
+    background-color: $sidebar-active-link-bg;
+    color: $sidebar-active-link-color;
   }
 }
 

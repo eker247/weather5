@@ -3,7 +3,7 @@ import { CommonModule, } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
 
-import { W5LayoutComponent } from './layout/layouts/w5-layout/w5-layout/w5-layout.component';
+import { W5LayoutComponent } from './layout/w5-layout/w5-layout.component';
 
 const routes: Routes = [
   {
@@ -17,7 +17,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        loadChildren: './layout/layouts/w5-layout/w5-layout.module#W5LayoutModule'
+        loadChildren: './layout/w5-layout.module#W5LayoutModule'
       }
     ]
   },

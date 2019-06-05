@@ -1,7 +1,7 @@
-<div class="weather-content">
+<div class="weather-content-bg">
   <app-chart-wide
-    *ngIf="humidity$ | async"
-    [chartData]="humidity$ | async"
+    *ngIf="humidity$ | async as humidity"
+    [chartData]="humidity"
     [chartLabels]="hour$ | async"
     chartDataLabel="Humidity"
   ></app-chart-wide>

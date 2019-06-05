@@ -1,5 +1,5 @@
 <div class="table-div">
-  <table class="table table-sm table-stripped table-hover table-responsive" *ngIf="(weatherResp$ | async)">
+  <table class="table table-sm table-stripped table-hover table-responsive" *ngIf="(forecast$ | async)">
     <thead>
       <tr>
         <th>Date</th>
@@ -10,13 +10,15 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let item of (weatherResp$ | async).list">
-        <td>{{ item.dt_txt | noMs }}</td>
-        <td>{{ item.temp | kelvinToCelsius }}</td>
-        <td>{{ item.wind.speed }} <app-arrow class="ml-2" [rotate]="item.wind.deg"></app-arrow>
+      <tr *ngFor="let item of forecast$ | async">
+        <td>{{ item.date | noMs }}</td>
+        <td>{{ item.temperature | kelvinToCelsius }}</td>
+        <td>
+          {{ item.windSpeed }}
+          <app-arrow class="ml-2" [rotate]="item.windDirection"></app-arrow>
         </td>
-        <td>{{ item.main.pressure }}</td>
-        <td>{{ item.main.humidity }}</td>
+        <td>{{ item.pressure }}</td>
+        <td>{{ item.humidity }}</td>
       </tr>
     </tbody>
   </table>

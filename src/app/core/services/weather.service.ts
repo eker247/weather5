@@ -46,8 +46,8 @@ export class WeatherService {
     this.weatherNavMessage.next(message);
   }
 
-
   constructor(private http: HttpClient) {
+    this.getWeatherForTown('Kraków').subscribe(weather => this.weatherSubject.next(weather));
   }
 
   getWeatherForTown(townName: string): Observable<any> {

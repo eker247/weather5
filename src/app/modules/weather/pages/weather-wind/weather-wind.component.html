@@ -1,5 +1,5 @@
 <div class="table-div">
-  <table *ngIf="weatherResp$ | async as weatherData" class="table table-sm table-stripped table-hover">
+  <table *ngIf="windForecast$ | async as windItems" class="table table-sm table-stripped table-hover">
     <thead>
       <tr>
         <th>Date</th>
@@ -8,8 +8,8 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let item of weatherData">
-        <td>{{ item.date }}</td>
+      <tr *ngFor="let item of windItems">
+        <td>{{ item.date | noMs }}</td>
         <td>
           <app-arrow [rotate]="item.wind.deg"></app-arrow>
         </td>

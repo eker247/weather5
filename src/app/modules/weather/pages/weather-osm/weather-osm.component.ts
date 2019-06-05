@@ -1,9 +1,12 @@
 import { Component, OnInit} from '@angular/core';
 import { Observable} from 'rxjs';
-import { WeatherResponse } from 'app/core/models/weather/WeatherResponse';
 import { WeatherService } from '../../../../core/services/weather.service';
+import { map } from 'rxjs/operators';
 
-declare var ol: any;
+interface Coordinates {
+  longitude: number;
+  latitude: number;
+}
 
 @Component({
   selector: 'app-weather-osm',
@@ -12,14 +15,18 @@ declare var ol: any;
 })
 export class WeatherOsmComponent implements OnInit {
 
-  isMapVisible = true;
-  weatherResp$: Observable<WeatherResponse>;
+  coordinates$: Observable<Coordinates>;
 
   constructor(private weatherService: WeatherService) {
   }
 
   ngOnInit() {
     this.weatherService.setWeatherNavMessage('Map of');
-    this.weatherResp$ = this.weatherService.weather$;
+    this.coordinates$ = this.weatherService.weather$.pipe(
+      map(weather => ({
+        longitude: weather.city.coord.lon,
+        latitude: weather.city.coord.lat
+      }))
+    );
   }
 }

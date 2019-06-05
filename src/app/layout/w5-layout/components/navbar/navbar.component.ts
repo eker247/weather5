@@ -1,5 +1,5 @@
 import { Component, OnInit, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
-import { W5LayoutService } from 'app/layout/layouts/w5-layout/w5-layout.service';
+import { W5LayoutService } from 'app/layout/w5-layout.service';
 
 @Component({
   selector: 'app-navbar',

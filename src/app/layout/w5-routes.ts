@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-import { RouterModule } from '@angular/router';
 import { WeatherOsmComponent } from 'app/modules/weather/pages/weather-osm/weather-osm.component';
 import {
   WeatherHumidityComponent,
@@ -20,4 +19,3 @@ export const W5Routes: Routes = [
   { path: 'map', component: WeatherOsmComponent },
 ];
 
-export default RouterModule.forChild(W5Routes);
