@@ -20,9 +20,13 @@ import { W5LayoutModule } from 'app/layout/w5-layout.module';
     RouterModule,
     AppRoutingModule,
     NgbModule,
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot({
+      timeOut: 3000,
+      positionClass: 'toast-bottom-center',
+      preventDuplicates: true,
+    }),
     CoreModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
     W5LayoutModule,
   ],
   declarations: [
@@ -32,4 +36,4 @@ import { W5LayoutModule } from 'app/layout/w5-layout.module';
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

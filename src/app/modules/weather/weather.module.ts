@@ -14,6 +14,8 @@ import { WeatherNoContentComponent } from './components/weather-no-content/weath
 import { WeatherMapComponent } from './components/weather-map/weather-map.component';
 import { WeatherSearcherComponent } from './components/weather-searcher/weather-searcher.component';
 import { WeatherPageNavInfoComponent } from './components/weather-page-nav-info/weather-page-nav-info.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -33,6 +35,8 @@ import { WeatherPageNavInfoComponent } from './components/weather-page-nav-info/
     ArrowModule,
     ChartsModule,
     PipesModule,
+    ReactiveFormsModule,
+    ToastrModule,
   ],
   exports: [
     WeatherHumidityComponent,
