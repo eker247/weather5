@@ -11,6 +11,7 @@ export class ChartWideComponent implements OnInit {
     this.chartValues = nums;
     this.drawChart();
   }
+
   @Input() chartDataLabel: string;
   @Input() chartLabels: string[];
   @Input() chartValuesLabel: string;
@@ -32,22 +33,9 @@ export class ChartWideComponent implements OnInit {
   public gradientChartOptionsConfigurationWithNumbersAndGrid: any;
 
   public lineChartType;
-  public lineChartData: Array<any>;
   public lineChartOptions: any;
   public lineChartLabels: Array<any>;
   public lineChartColors: Array<any>;
-
-  public lineChartWithNumbersAndGridType;
-  public lineChartWithNumbersAndGridData: Array<any>;
-  public lineChartWithNumbersAndGridOptions: any;
-  public lineChartWithNumbersAndGridLabels: Array<any>;
-  public lineChartWithNumbersAndGridColors: Array<any>;
-
-  public lineChartGradientsNumbersType;
-  public lineChartGradientsNumbersData: Array<any>;
-  public lineChartGradientsNumbersOptions: any;
-  public lineChartGradientsNumbersLabels: Array<any>;
-  public lineChartGradientsNumbersColors: Array<any>;
 
   // events
   public chartClicked(e: any): void {

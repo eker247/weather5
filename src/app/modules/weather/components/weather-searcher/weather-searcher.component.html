@@ -1,10 +1,10 @@
-<div class="input-group no-border">
+<div [formGroup]="searcherForm" class="input-group no-border">
   <input
+    formControlName="searcher"
     type="text"
     [value]="foundTown$ | async"
     class="form-control input-searcher root-font"
     placeholder="Search..."
-    (keyup.enter)="keyUp.next($event.target.value)"
   >
   <div class="input-group-append">
     <div class="input-group-text">

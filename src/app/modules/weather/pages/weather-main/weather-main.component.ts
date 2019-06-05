@@ -26,7 +26,6 @@ export class WeatherMainComponent implements OnInit {
 
   ngOnInit() {
     this.forecast$ = this.weatherService.weather$.pipe(
-      tap(console.log),
       map(r =>
         r.list.map(item => ({
           date: item.dt_txt,
