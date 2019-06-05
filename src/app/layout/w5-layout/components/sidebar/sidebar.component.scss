@@ -3,6 +3,8 @@
 .w5-sidebar {
   background-color: $sidebar-bg;
   height: 100%;
+  max-width: 90vw;
+  overflow: hidden;
 }
 
 .active {
@@ -10,7 +12,7 @@
 }
 
 .logo {
-  padding: 6px;
+  padding: $margin-sm;
 }
 
 .ico-svg img {
@@ -27,7 +29,7 @@
   padding: 0;
 
   li {
-    padding: 6px;
+    padding: $margin-sm;
 
     a {
       display: block;
@@ -43,5 +45,5 @@
 }
 
 .link-description {
-  margin-left: 6px;
+  margin-left: $margin-sm;
 }

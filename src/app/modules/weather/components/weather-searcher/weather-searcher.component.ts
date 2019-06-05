@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, of, Subject } from 'rxjs';
-import { catchError, flatMap } from 'rxjs/operators';
-import { WeatherService } from '../../../../core/services/weather.service';
-import { WeatherResponse } from '../../../../core/models/weather/WeatherResponse';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { catchError, debounceTime, flatMap, map, mapTo, tap } from 'rxjs/operators';
+import { WeatherService } from 'app/core/services/weather.service';
+import { WeatherResponse } from 'app/core/models/weather/WeatherResponse';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-weather-searcher',
@@ -11,29 +12,48 @@ import { FormBuilder, FormGroup } from '@angular/forms';
   styleUrls: ['./weather-searcher.component.scss']
 })
 export class WeatherSearcherComponent implements OnInit {
-  keyUp = new Subject<string>();
+
+  searcherForm: FormGroup;
   foundTown$: Observable<string>;
 
-  constructor(private weatherService: WeatherService) { }
+  constructor(
+    private weatherService: WeatherService,
+    private formBuilder: FormBuilder,
+    private toast: ToastrService,
+  ) { }
 
   ngOnInit() {
+    this.searcherForm = this.formBuilder.group({
+      searcher: ['', Validators.required]
+    });
     this.searchForecast();
   }
 
   searchForecast() {
     let searchedTown: string;
 
-    this.foundTown$ = this.keyUp.pipe(
-      // debounceTime(300),
+    this.foundTown$ = this.searcherForm.valueChanges.pipe(
+      map(() => {
+        return this.searcherForm.controls.searcher.value;
+      }),
+
+      debounceTime(400),
+
       flatMap(townName => {
         searchedTown = townName;
 
+        if (townName.length < 3) {
+          return of(null);
+        }
+
         return this.weatherService.getWeatherForTown(townName).pipe(
-          catchError(e => {
+          catchError((err) => {
+            this.toast.error(err.statusText, 'Error');
             return of(null);
-          })
+          }),
         );
       }),
+
       flatMap((weatherResponse: WeatherResponse) => {
         if (weatherResponse) {
           this.weatherService.weatherSubject.next(weatherResponse);
@@ -42,7 +62,6 @@ export class WeatherSearcherComponent implements OnInit {
           return of(searchedTown);
         }
       }),
-      catchError(() => of(null)),
     );
   }
 }

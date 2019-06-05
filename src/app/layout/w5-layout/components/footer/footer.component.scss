@@ -1,21 +1,30 @@
+@import "../../variables";
+@import "../../common";
+
 .w5-footer {
   font-size: 1rem;
   display: grid;
   grid-template-columns: 3fr 1fr;
   align-items: center;
   height: 100%;
-
-  ul {
-    justify-self: left;
-
-    li {
-      display: inline-block;
-      margin-left: 6px;
-    }
-  }
+  background-color: $footer-bg;
+  color: $footer-color;
 
   div {
     justify-self: right;
     margin-right: 12px;
+  }
+}
+
+a {
+  color: $footer-color;
+  text-decoration: underline #00bbff;
+  margin-left: $margin-sm;
+}
+
+@media (max-width: $mobile-width) {
+  .w5-footer div {
+    grid-column: 1 / span 2;
+    justify-self: center;
   }
 }
