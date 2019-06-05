@@ -1,7 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { CacheService } from 'app/core/services/cache.service';
-import { WeatherResponse } from 'app/core/models/weather/WeatherResponse';
-import { WeatherWind } from 'app/core/models/weather/WeatherWind';
+import { Observable } from 'rxjs';
+import { WeatherService } from 'app/core/services/weather.service';
+import { map } from 'rxjs/operators';
+
+interface WindVM {
+  date: string;
+  wind: {
+    speed: number,
+    deg: number
+  };
+}
 
 @Component({
   selector: 'app-weather-wind',
@@ -10,19 +18,22 @@ import { WeatherWind } from 'app/core/models/weather/WeatherWind';
 })
 export class WeatherWindComponent implements OnInit {
 
-  weatherResp: WeatherResponse;
+  windForecast$: Observable<WindVM[]>;
 
-  constructor(private _cs: CacheService) { }
+  constructor(private weatherService: WeatherService) { }
 
   ngOnInit() {
-    this.initData();
-    this._cs.newWeather$.subscribe(() => {
-      this.initData();
-    });
-  }
-
-  initData() {
-    this.weatherResp = this._cs.getWeather();
-    console.log(this.weatherResp);
+    this.weatherService.setWeatherNavMessage('Wind in');
+    this.windForecast$ = this.weatherService.weather$.pipe(
+      map(weather => {
+        return weather.list.map(item => ({
+          date: item.dt_txt,
+          wind: {
+            deg: item.wind.deg,
+            speed: item.wind.speed
+          }
+        }));
+      }),
+    );
   }
 }

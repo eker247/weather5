@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { WeatherResponse } from 'app/core/models/weather/WeatherResponse';
-import { CacheService } from 'app/core/services/cache.service';
+import { Observable } from 'rxjs';
+import { WeatherService } from '../../../../core/services/weather.service';
 
 @Component({
   selector: 'app-weather-humidity',
@@ -9,33 +9,14 @@ import { CacheService } from 'app/core/services/cache.service';
 })
 export class WeatherHumidityComponent implements OnInit {
 
-  weatherResp: WeatherResponse;
-  humidities: number[];
-  hours: string[];
-  isChartVisible = true;
+  humidity$: Observable<number[]>;
+  hour$: Observable<string[]>;
 
-  constructor(private _cs: CacheService) { }
+  constructor(private weatherService: WeatherService) { }
 
   ngOnInit() {
-    this.initData();
-    this._cs.newWeather$.subscribe(() => {
-      this.initData();
-    });
-  }
-
-  initData() {
-    this.weatherResp = this._cs.getWeather();
-    if (this.weatherResp) {
-      this.humidities = this.weatherResp.list.map(wli => wli.main.humidity);
-      this.hours = this.weatherResp.list.map(wli => wli.dt_txt.substring(0, 16));
-      this.resetChart();
-    }
-  }
-
-  resetChart() {
-    this.isChartVisible = false;
-    setTimeout(() => {
-      this.isChartVisible = true;
-    }, 10);
+    this.weatherService.setWeatherNavMessage('Humidity in');
+    this.humidity$ = this.weatherService.humidity$;
+    this.hour$ = this.weatherService.forecastTime$;
   }
 }

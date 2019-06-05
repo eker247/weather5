@@ -1,6 +1,17 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { WeatherResponse } from 'app/core/models/weather/WeatherResponse';
-import { CacheService } from 'app/core/services/cache.service';
+import { Observable } from 'rxjs';
+import { WeatherService } from '../../../../core/services/weather.service';
+import { map, tap } from 'rxjs/operators';
+
+interface MainForecast {
+  date: string;
+  temperature: number;
+  windSpeed: number;
+  windDirection: number;
+  pressure: number;
+  humidity: number;
+}
 
 @Component({
   selector: 'app-weather-main',
@@ -9,18 +20,25 @@ import { CacheService } from 'app/core/services/cache.service';
 })
 export class WeatherMainComponent implements OnInit {
 
-  weatherResp: WeatherResponse;
+  forecast$: Observable<MainForecast[]>;
 
-  constructor(private _cs: CacheService) { }
+  constructor(private weatherService: WeatherService) { }
 
   ngOnInit() {
-    this.initData();
-    this._cs.newWeather$.subscribe(() => {
-      this.initData();
-    });
-  }
+    this.forecast$ = this.weatherService.weather$.pipe(
+      tap(console.log),
+      map(r =>
+        r.list.map(item => ({
+          date: item.dt_txt,
+          temperature: item.main.temp,
+          windSpeed: item.wind.speed,
+          windDirection: item.wind.deg,
+          pressure: item.main.pressure,
+          humidity: item.main.humidity
+        })),
+      )
+    );
+    this.weatherService.setWeatherNavMessage('Weather in');
 
-  initData() {
-    this.weatherResp = this._cs.getWeather();
   }
 }

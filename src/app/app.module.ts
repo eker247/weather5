@@ -7,31 +7,29 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrModule } from 'ngx-toastr';
 
 import { AppRoutingModule } from './app.routing';
-import { ComponentsModule } from './layout/components/components.module';
 
 import { AppComponent } from './app.component';
 
-import { AdminLayoutComponent } from './layout/layouts/admin-layout/admin-layout.component';
 import { CoreModule } from './core/core.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { W5LayoutModule } from 'app/layout/w5-layout.module';
 
 @NgModule({
   imports: [
     BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
-    ComponentsModule,
     RouterModule,
     AppRoutingModule,
     NgbModule,
     ToastrModule.forRoot(),
     CoreModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    W5LayoutModule,
   ],
   declarations: [
     AppComponent,
-    AdminLayoutComponent
 
   ],
   providers: [],

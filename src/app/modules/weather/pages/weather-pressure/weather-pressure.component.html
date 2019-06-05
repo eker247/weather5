@@ -1,8 +1,8 @@
-<div class="black-bar align-bottom">
-  <div *ngIf="weatherResp" class="align-b ml-4 mb-3">Pressure in {{ weatherResp.city.name }}</div>
-  <div *ngIf="!weatherResp" class="align-b ml-4 mb-3">No available forecast. Put a city name into the searcher.</div>
-</div>
-
-<div class="weather-content">
-  <app-chart-wide *ngIf="isChartVisible && pressures" [chartData]="pressures" [chartLabels]="hours" chartDataLabel="Pressure"></app-chart-wide>
+<div class="weather-content-bg">
+  <app-chart-wide
+    *ngIf="pressure$ | async"
+    [chartData]="pressure$ | async"
+    [chartLabels]="hour$ | async"
+    chartDataLabel="Pressure"
+  ></app-chart-wide>
 </div>

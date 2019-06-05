@@ -1,0 +1,47 @@
+@import "../../variables";
+
+.w5-sidebar {
+  background-color: $sidebar-bg;
+  height: 100%;
+}
+
+.active {
+  color: red;
+}
+
+.logo {
+  padding: 6px;
+}
+
+.ico-svg img {
+  width: 32px;
+}
+
+.logo-img img {
+  width: 32px;
+}
+
+.nav-ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  li {
+    padding: 6px;
+
+    a {
+      display: block;
+      color: $sidebar-color;
+      width: 100%;
+    }
+  }
+
+  .active {
+    background-color: $sidebar-active-link-bg;
+    color: $sidebar-active-link-color;
+  }
+}
+
+.link-description {
+  margin-left: 6px;
+}

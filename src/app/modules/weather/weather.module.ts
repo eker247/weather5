@@ -12,6 +12,8 @@ import { PipesModule } from '../pipes/pipes.module';
 import { WeatherOsmComponent } from './pages/weather-osm/weather-osm.component';
 import { WeatherNoContentComponent } from './components/weather-no-content/weather-no-content.component';
 import { WeatherMapComponent } from './components/weather-map/weather-map.component';
+import { WeatherSearcherComponent } from './components/weather-searcher/weather-searcher.component';
+import { WeatherPageNavInfoComponent } from './components/weather-page-nav-info/weather-page-nav-info.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +25,8 @@ import { WeatherMapComponent } from './components/weather-map/weather-map.compon
     WeatherWindComponent,
     WeatherNoContentComponent,
     WeatherMapComponent,
+    WeatherSearcherComponent,
+    WeatherPageNavInfoComponent,
   ],
   imports: [
     CommonModule,
@@ -37,6 +41,8 @@ import { WeatherMapComponent } from './components/weather-map/weather-map.compon
     WeatherPressureComponent,
     WeatherTemperatureComponent,
     WeatherWindComponent,
+    WeatherSearcherComponent,
+    WeatherPageNavInfoComponent,
   ]
 })
 export class WeatherModule { }

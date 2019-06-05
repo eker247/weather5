@@ -1,9 +1,6 @@
-import { Component, OnInit, ViewChild, ElementRef, Input, AfterViewInit } from '@angular/core';
-import { fromEvent } from 'rxjs';
+import { Component, ViewChild, ElementRef, Input, AfterViewInit, HostListener } from '@angular/core';
 
 declare var ol: any;
-
-let map: any;
 
 @Component({
   selector: 'app-weather-map',
@@ -12,16 +9,28 @@ let map: any;
 })
 export class WeatherMapComponent implements AfterViewInit {
 
-  @Input() longitude: number = 20.6913;
-  @Input() latitude: number = 49.6249;
-  @ViewChild('osmMap') osmMap: ElementRef<any>;
+  @Input() set coordinates(coord: { longitude: number, latitude: number }) {
+    console.log(coord);
+    this.longitudeData = coord.longitude;
+    this.latitudeData = coord.latitude;
+    if (this.map) {
+      this.changeMapCenter();
+    }
+  }
 
+  longitudeData: number;
+  latitudeData: number;
   map: any;
 
   constructor() {
   }
 
   ngAfterViewInit() {
+    this.setMap();
+  }
+
+
+  setMap() {
     this.map = new ol.Map({
       target: 'map',
       layers: [
@@ -30,9 +39,13 @@ export class WeatherMapComponent implements AfterViewInit {
         })
       ],
       view: new ol.View({
-        center: ol.proj.fromLonLat([this.longitude, this.latitude]),
+        center: ol.proj.fromLonLat([this.longitudeData || 20.6913, this.latitudeData || 49.6249]),
         zoom: 8
       })
     });
+  }
+
+  changeMapCenter() {
+    this.map.getView().setCenter(ol.proj.fromLonLat([this.longitudeData, this.latitudeData]));
   }
 }

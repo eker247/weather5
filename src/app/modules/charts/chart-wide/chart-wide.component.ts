@@ -7,12 +7,16 @@ import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
 })
 export class ChartWideComponent implements OnInit {
 
-  @Input() chartData: number[];
+  @Input() set chartData(nums: number[]) {
+    this.chartValues = nums;
+    this.drawChart();
+  }
   @Input() chartDataLabel: string;
   @Input() chartLabels: string[];
-  @ViewChild('bigDashboardChart') bigDashboardChart: ElementRef<HTMLCanvasElement>;
+  @Input() chartValuesLabel: string;
+  @ViewChild('bigDashboardChart', {static: true}) bigDashboardChart: ElementRef<HTMLCanvasElement>;
 
-
+  public chartValues: number[];
   public lineBigDashboardChartType;
   public gradientStroke;
   public chartColor;
@@ -44,6 +48,7 @@ export class ChartWideComponent implements OnInit {
   public lineChartGradientsNumbersOptions: any;
   public lineChartGradientsNumbersLabels: Array<any>;
   public lineChartGradientsNumbersColors: Array<any>;
+
   // events
   public chartClicked(e: any): void {
     // console.log(e);
@@ -52,8 +57,9 @@ export class ChartWideComponent implements OnInit {
   public chartHovered(e: any): void {
     // console.log(e);
   }
+
   public hexToRGB(hex, alpha) {
-    let
+    const
       r = parseInt(hex.slice(1, 3), 16),
       g = parseInt(hex.slice(3, 5), 16),
       b = parseInt(hex.slice(5, 7), 16);
@@ -64,9 +70,15 @@ export class ChartWideComponent implements OnInit {
       return 'rgb(' + r + ', ' + g + ', ' + b + ')';
     }
   }
-  constructor() { }
+
+  constructor() {
+  }
 
   ngOnInit() {
+    this.drawChart();
+  }
+
+  drawChart() {
     this.chartColor = '#FFFFFF';
     this.canvas = this.bigDashboardChart.nativeElement;
     this.ctx = this.canvas.getContext('2d');
@@ -81,7 +93,7 @@ export class ChartWideComponent implements OnInit {
 
     this.lineBigDashboardChartData = [
       {
-        label: this.chartDataLabel || 'Data',
+        label: this.chartValuesLabel || 'Data',
 
         pointBorderWidth: 1,
         pointHoverRadius: 7,
@@ -90,7 +102,7 @@ export class ChartWideComponent implements OnInit {
         fill: true,
 
         borderWidth: 2,
-        data: this.chartData,
+        data: this.chartValues,
       }
     ];
     this.lineBigDashboardChartColors = [
@@ -274,7 +286,5 @@ export class ChartWideComponent implements OnInit {
     this.lineChartOptions = this.gradientChartOptionsConfiguration;
 
     this.lineChartType = 'line';
-
-
   }
 }

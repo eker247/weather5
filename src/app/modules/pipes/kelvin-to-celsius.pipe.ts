@@ -6,7 +6,7 @@ import { kelvinToCelsius } from 'app/core/functions';
 })
 export class KelvinToCelsiusPipe implements PipeTransform {
 
-  transform(kelvin: never): number {
+  transform(kelvin: number): number {
     return kelvinToCelsius(kelvin);
   }
 

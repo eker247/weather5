@@ -1,0 +1,26 @@
+<div class="w5-sidebar">
+
+  <div class="logo">
+    <a (click)="layoutService.visibleSidebar.next(false)" class="simple-text logo-mini">
+      <span class="logo-img">
+        <img src="./assets/img/sun.png"/>
+      </span>
+      <i>
+        Weather 5
+      </i>
+    </a>
+  </div>
+
+  <ul class="nav-ul">
+    <li routerLinkActive="active" *ngFor="let menuItem of menuItems">
+      <a [routerLink]="[menuItem.path]">
+        <i *ngIf="menuItem.icon" class="now-ui-icons {{menuItem.icon}}"></i>
+        <i *ngIf="menuItem.svg" class="ico-svg nav-item">
+          <img [src]="'assets/svg/' + menuItem.svg + '.svg'"/>
+        </i>
+        <span class="link-description">{{menuItem.title}}</span>
+      </a>
+    </li>
+  </ul>
+
+</div>

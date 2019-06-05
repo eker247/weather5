@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { WeatherResponse } from 'app/core/models/weather/WeatherResponse';
-import { CacheService } from 'app/core/services/cache.service';
+import { Observable } from 'rxjs';
+import { WeatherService } from '../../../../core/services/weather.service';
 
 @Component({
   selector: 'app-weather-pressure',
@@ -9,34 +9,15 @@ import { CacheService } from 'app/core/services/cache.service';
 })
 export class WeatherPressureComponent implements OnInit {
 
-  weatherResp: WeatherResponse;
-  pressures: number[];
-  hours: string[];
-  isChartVisible = true;
+  pressure$: Observable<number[]>;
+  hour$: Observable<string[]>;
 
-  constructor(private _cs: CacheService) { }
+  constructor(private weatherService: WeatherService) {
+  }
 
   ngOnInit() {
-    this.initData();
-    this._cs.newWeather$.subscribe(() => {
-      this.initData();
-    });
-  }
-
-  initData() {
-    this.weatherResp = this._cs.getWeather();
-    if (this.weatherResp) {
-      this.pressures = this.weatherResp.list.map(wli => wli.main.pressure);
-      this.hours = this.weatherResp.list.map(wli => wli.dt_txt.substring(0, 16));
-      this.resetChart();
-    }
-  }
-
-
-  resetChart() {
-    this.isChartVisible = false;
-    setTimeout(() => {
-      this.isChartVisible = true;
-    }, 10);
+    this.weatherService.setWeatherNavMessage('Pressure in');
+    this.pressure$ = this.weatherService.pressure$;
+    this.hour$ = this.weatherService.forecastTime$;
   }
 }

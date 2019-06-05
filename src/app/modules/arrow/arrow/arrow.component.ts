@@ -1,19 +1,16 @@
-import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-arrow',
   templateUrl: './arrow.component.html',
   styleUrls: ['./arrow.component.scss']
 })
-export class ArrowComponent implements OnInit {
+export class ArrowComponent {
 
-  @Input() rotate: number;
-  @ViewChild('arrow') arrow: ElementRef;
+  rotation: string;
 
-  constructor() { }
-
-  ngOnInit() {
-    this.arrow.nativeElement.style.setProperty('transform', `rotate(${this.rotate || 0}deg)`);
+  @Input() set rotate(rotation: number) {
+    this.rotation = `rotate(${rotation}deg)`;
   }
-
 }
+
