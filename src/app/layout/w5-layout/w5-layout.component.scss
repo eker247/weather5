@@ -1,5 +1,24 @@
 @import "variables";
 
+.fog {
+  position: fixed;
+  top: 0;
+  z-index: 2;
+  min-height: 100%;
+  min-width: 100%;
+  background-color: #000a;
+  animation: appear .3s;
+}
+
+@keyframes appear {
+  from {
+    background-color: #0000;
+  }
+  to {
+    background-color: #000a;
+  }
+}
+
 .w5-layout {
   min-height: 100vh;
   display: grid;
@@ -31,9 +50,8 @@ a {
     left: -120% !important;
     z-index: 4;
     background-color: $sidebar-bg;
-    height: 900px;
+    height: 100vh;
     display: block;
-    left: 0;
     transition: .3s left;
   }
 

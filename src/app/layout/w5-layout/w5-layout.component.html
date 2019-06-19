@@ -4,7 +4,7 @@
     <app-navbar></app-navbar>
   </div>
 
-  <div class="w5-sidebar" [ngClass]="{'w5-visible-sidebar': (layoutService.visibleSidebar | async)}">
+  <div class="w5-sidebar" [ngClass]="{'w5-visible-sidebar': layoutService.visibleSidebar | async}">
     <app-sidebar></app-sidebar>
   </div>
 
@@ -15,5 +15,7 @@
   <div class="w5-footer">
     <app-footer></app-footer>
   </div>
+
+  <div [ngClass]="{'fog': layoutService.visibleSidebar | async}"></div>
 
 </div>
